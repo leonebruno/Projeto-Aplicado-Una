@@ -1,0 +1,15 @@
+{
+	"ftp": {
+		"ip": "31.220.16.209",
+		"nome": "u949449188",
+		"porta": "21",
+		"senha": "d=r#MIpct8Is",
+		"dominio": "qrschool.hol.es",
+	},
+	"mySql":{
+		"bd": "mysql.hostinger.com.br",
+		"user": "u949449188_qrsch",
+		"db": "mysql.hostinger.com.br",
+		"pass": "NXEpeEG&nb7S@jx"
+	}
+}
