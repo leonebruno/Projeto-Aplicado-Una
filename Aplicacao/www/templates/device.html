@@ -1,0 +1,92 @@
+<ion-view title="Device">
+	<!-- Always shows a header, even in smaller screens. -->
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row contenter">
+				<!-- Title -->
+				<span class="mdl-layout-title">{{title}}</span>
+				<!-- Add spacer, to align navigation to the right -->
+				<div class="mdl-layout-spacer"></div>
+				<!-- Navigation. We hide it in small screens. -->
+			</div>
+		</header>
+		<div class="mdl-layout__drawer">
+			<span class="mdl-layout-title">{{title}}</span>
+		</div>
+		<main class="mdl-layout__content">
+			<div class="page-content">
+				<!-- Your content goes here -->
+       <!-- Simple list -->
+       <style>
+        .demo-list-item {
+          width: 100%;
+        }
+        #contenter{
+          height: 250px;
+          background-color: rgb(244,67,54);
+          padding: 0px;
+          margin: -5px;
+        }
+        .list-plus{
+          border-bottom: solid rgba(158,158,158,0.5) 1px;
+          padding-bottom: 20px;
+        }
+        #icone{
+          float: center;
+        }
+      </style>
+      <div class="row">
+        <div class="col s6" id="contenter">
+          <div id="icone" class="col s1 offset-s3">
+            <!--<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 9h-2V5h2v6zm0 4h-2v-2h2v2z"/></svg>-->
+          </div>               
+        </div>
+      </div>
+      <div class="row">
+        <ul class="demo-list-item mdl-list">
+          <div class="row list-plus">
+            <li class="mdl-list__item col s4 offset-s3">
+              <div class="device-list">
+                <span class="mdl-list__item-primary-content">Platforma : {{platform}}</span>
+              </div>
+            </li>
+          </div>
+          
+          <div class="row list-plus">
+            <li class="mdl-list__item col s4 offset-s3">
+              <span class="mdl-list__item-primary-content">
+                Modelo : {{model}}
+              </span>
+            </li>
+          </div>
+          
+          <div class="row list-plus">
+            <li class="mdl-list__item col s4 offset-s3">
+              <span class="mdl-list__item-primary-content">
+                Versão : {{version}}
+              </span>
+            </li>
+          </div>
+          
+          <div class="row list-plus">
+            <li class="mdl-list__item col s4 offset-s3">
+              <span class="mdl-list__item-primary-content">
+                Fabricante : {{manufacturer}}
+              </span>
+            </li>
+          </div>
+          
+          <div class="row list-plus">
+            <li class="mdl-list__item col s4 offset-s3">
+              <span class="mdl-list__item-primary-content">
+                {{uuid}}
+              </span>
+            </li>
+          </div>
+          
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+</ion-view>

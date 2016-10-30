@@ -1,0 +1,42 @@
+<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#map {
+		height: 100%;
+	}
+</style>
+<ion-view title="Mapa">
+	<!-- Always shows a header, even in smaller screens. -->
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<!-- Title -->
+				<span class="mdl-layout-title">{{title}}</span>
+				<!-- Add spacer, to align navigation to the right -->
+				<div class="mdl-layout-spacer"></div>
+				<!-- Navigation. We hide it in small screens. -->
+			</div>
+		</header>
+		<div class="mdl-layout__drawer">
+			<span class="mdl-layout-title">{{title}}</span>
+		</div>
+		<main class="mdl-layout__content">
+			<div class="page-content">
+				<!-- Your content goes here -->
+				<ion-content scroll="false">
+					<map on-create="mapCreated(map)"></map>
+				</ion-content>
+				<ion-footer-bar class="bar-stable">
+					<a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
+				</ion-footer-bar>
+			</div>
+		</ion-content>
+	</div>
+</main>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&amp;&signed_in=true&callback=initMap"
+async defer>
+</script>

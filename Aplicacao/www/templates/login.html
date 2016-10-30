@@ -1,0 +1,74 @@
+<ion-view view-title="Entrar">
+<ion-content scroll="false">
+<div class="row" id="painel-login">
+	<form class="col s12" name="form-login" ng-cloak="">
+		<div class="row" class="input-field">
+			<md-radio-group class="col s6 offset-s1" ng-model="user">
+			<md-radio-button class="col s6" value="Aluno" class="md-primary md-checked"> Aluno </md-radio-button>
+			<md-radio-button class="col s6" value="Professor">Professor</md-radio-button>
+			</md-radio-group>
+		</div>
+		<div class="input-field">
+			<div class="row">
+				<input type="text" id="ipt-ra" class="validate" ng-model="ra">
+				<label for="ra">RA</label>
+			</div>
+		</div>
+		<div class="input-field">
+			<div class="row">
+				<input id="password" type="password" class="validate" ng-model="senha">
+				<label for="password">Senha</label>
+			</div>
+		</div>
+		<div hidden="true">
+			<div class="input-field col s6">
+				<input type="text" id="ipt-ra" class="validate" ng-model="login.nome">
+				<label for="ra">Nome</label>
+			</div>
+			<div class="input-field col s6">
+				<input id="password" type="password" class="validate" ng-model="login.materia">
+				<label for="password">Matéria</label>
+			</div>
+			<div class="input-field col s6">
+				<input id="password" type="password" class="validate" ng-model="login.senha">
+				<label for="password">Senha</label>
+			</div>
+		</div>
+		<div class="row" class="area-buttom s6">
+			<a class="waves-effect waves-light btn col s12 red" id="btn-logar" [ng-click="logar();"] [on-hold="onHold()"] [ng-click="auth()]" href="#/app/home">Entrar</a>
+		</div>
+	</form>
+</div>
+<div class="row" id="copy-fixed">
+	<div class="h5 col s2 offset-s4">QRSchool 2016</div>
+</div>
+</div>
+</ion-content>
+</ion-view>
+<script src="lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+
+<!--<div ng-switch="user">
+<div ng-switch-when="Aluno">
+		<div class="input-field">
+				<input type="text" id="ipt-ra" class="validate" ng-model="login.ra">
+				<label for="ra">RA</label>
+		</div>
+		<div class="input-field">
+				<input id="password" type="password" class="validate" ng-model="login.senha">
+				<label for="password">Senha</label>
+		</div>
+</div>
+<div ng-switch-when="Professor">
+		<div class="input-field col s6">
+				<input type="text" id="ipt-ra" class="validate" ng-model="login.nome">
+				<label for="ra">Nome</label>
+		</div>
+		<div class="input-field col s6">
+				<input id="password" type="password" class="validate" ng-model="login.materia">
+				<label for="password">Matéria</label>
+		</div>
+		<div class="input-field col s6">
+				<input id="password" type="password" class="validate" ng-model="login.senha">
+				<label for="password">Senha</label>
+		</div>
+</div>-->

@@ -1,0 +1,71 @@
+<!-- Simple list -->
+<style>
+#contenter{
+background-color: rgb(244,67,54);
+padding: 0px;
+margin: -5px;
+height: 200px;
+}
+.list-plus{
+border-bottom: solid rgba(158,158,158,0.5) 1px;
+padding-bottom: 20px;
+}
+#imagem{
+float: center;
+background-color: rgb(244,67,54);
+}
+#img-qrcode{
+	position: absolute;
+	float: left;
+	width: 80%;
+}
+</style>
+<ion-view title="Abrir Aula">
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	<header class="mdl-layout__header">
+		<div class="mdl-layout__header-row">
+			<!-- Title -->
+			<span class="mdl-layout-title">{{title}}</span>
+			<!-- Add spacer, to align navigation to the right -->
+			<div class="mdl-layout-spacer"></div>
+			<!-- Navigation. We hide it in small screens. -->
+		</div>
+	</header>
+	<div class="mdl-layout__drawer">
+		<span class="mdl-layout-title">{{title}}</span>
+	</div>
+	<main class="mdl-layout__content">
+	<div class="page-content">
+		<!-- Your content goes here -->
+		<div class="row">
+			<div class="col s6" id="contenter">
+				<div id="imagem">
+					<!--<img src="/www/img/img1.png" alt="" id="img-qrcode" class="col s1 offset-s1">-->
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="row" style="margin-top: -20px;">
+				<div class="col s6">
+					<h5>Aulas disponíveis</h5><hr/>
+				</div>
+			</div>
+			<div class="row" id="aria-aulas" style="margin-top: -40px;">
+				<div class="input-field col s12 offset-s1">
+					<md-radio-group>
+						<md-radio-button value="aula1" class="row"><p>Linguagem de Progragamação</p></md-radio-button>
+						<md-radio-button value="aula2" class="row"><p>Banco de Dados</p></md-radio-button>
+					</md-radio-group>
+				</div>
+			</div>
+		</div>
+		<div layout="row">
+			<div layout="col s6" id="btn-scan">
+				<button class="waves-effect waves-light btn red" ng-click="scanBarcode();" style="width: 100%;">Ler o codigo de presença</button>
+			</div>
+		</div>
+	</div>
+	</main>
+</div>
+</ion-view>
