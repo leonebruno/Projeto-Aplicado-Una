@@ -1,0 +1,70 @@
+<ion-view title="Abrir Aula" scroll="false" ng-init="done=false">
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	<header class="mdl-layout__header">
+		<div class="mdl-layout__header-row">
+			<!-- Title -->
+			<span class="mdl-layout-title">{{title}}</span>
+			<!-- Add spacer, to align navigation to the right -->
+			<div class="mdl-layout-spacer"></div>
+			<!-- Navigation. We hide it in small screens. -->
+			<span class="ion-android-refresh" ng-click="loadAlunos()" style="border-radius: 100px;width: 20px;"></span>
+		</div>
+	</header>
+	<div class="mdl-layout__drawer">
+		<span class="mdl-layout-title">{{title}}</span>
+	</div>
+	<main class="mdl-layout__content">
+	<div class="page-content">
+		<!-- Your content goes here -->
+		<div class="row" id="loading-fr">
+			<div class="col s1">
+				<ion-spinner id="ico"></ion-spinner>
+			</div>
+		</div>
+		<div>
+			<div class="row" style="margin-top: -40px;">
+				<div class="col s12">
+					<md-group-list>
+					<md-list-item class="md-2-line" ng-repeat="nome in alunos $index">
+					<p>{{nome}}</p>
+					</md-list-item>
+					</md-group-list>
+				</div>
+			</div>
+			<div layout="row">
+				<div layout="col s6" id="btn-scan">
+					<button class="waves-effect waves-light btn red md-raised md-cornered" style="width: 100%;">Confirmar Presença</button>
+				</div>
+			</div>
+		</div>
+		</main>
+	</div>
+	</ion-view>
+	<!--
+	<ion-list>
+	<ion-item ng-repeat="nome in aulas track by $index">
+	</ion-item>
+	</ion-list>
+	-->
+	<!-- <ion-view view-title="">
+		<md-content>
+	<!--<md-list>
+		<md-list-item class="md-2-line" ng-repeat="nome in aulas">
+			<p>{{nome}}</p>
+		</md-list-item>
+	</md-list>-->
+	<!--<ion-spinner style="display: block;"></ion-spinner>
+	<ion-list>
+		<ion-item ng-repeat="nome in aulas track by $index">
+			{{nome}}
+		</ion-item>
+	</ion-list>
+	<div class="row">
+				<div class="col s12">
+							<button class="waves-effect waves-light btn red" id="btn-listar" ng-click="loadAulas()" style="width: 90%;">Lista Aulas</button>
+							<md-button class="md-raised md-cornered" ng-click="loadAulas()" ng-hide="true">Mostrar Aulas</md-button>
+				</div>
+	</div>
+	</md-content>
+	</ion-view> -->

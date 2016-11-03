@@ -1,41 +1,33 @@
 <ion-view view-title="Entrar">
 <ion-content scroll="false">
+<div class="row" id="loading">
+	<div class="col s1">
+		<ion-spinner id="ico"></ion-spinner>
+	</div>
+</div>
+<div class="row" style="padding-top: 50px;"><div class="col s12"><span id="result"></span></div></div>
 <div class="row" id="painel-login">
-	<form class="col s12" name="form-login" ng-cloak="">
-		<div class="row" class="input-field">
-			<md-radio-group class="col s6 offset-s1" ng-model="user">
-			<md-radio-button class="col s6" value="Aluno" class="md-primary md-checked"> Aluno </md-radio-button>
-			<md-radio-button class="col s6" value="Professor">Professor</md-radio-button>
+	<form class="col s12" id="form-login" method="post" [action=""] ng-cloak="">
+		<!--<div class="row" class="input-field">
+			<md-radio-group class="col s6 offset-s1" id="rd-nivel" ng-model="user">
+				<md-radio-button class="col s6" value="Aluno" class="md-primary md-checked"> Aluno </md-radio-button>
+				<md-radio-button class="col s6" value="Professor">Professor</md-radio-button>
 			</md-radio-group>
-		</div>
+		</div>-->
 		<div class="input-field">
 			<div class="row">
-				<input type="text" id="ipt-ra" class="validate" ng-model="ra">
+				<input type="text" id="ipt-ra" class="validate" ng-model="ra" required>
 				<label for="ra">RA</label>
 			</div>
 		</div>
 		<div class="input-field">
 			<div class="row">
-				<input id="password" type="password" class="validate" ng-model="senha">
-				<label for="password">Senha</label>
-			</div>
-		</div>
-		<div hidden="true">
-			<div class="input-field col s6">
-				<input type="text" id="ipt-ra" class="validate" ng-model="login.nome">
-				<label for="ra">Nome</label>
-			</div>
-			<div class="input-field col s6">
-				<input id="password" type="password" class="validate" ng-model="login.materia">
-				<label for="password">Matéria</label>
-			</div>
-			<div class="input-field col s6">
-				<input id="password" type="password" class="validate" ng-model="login.senha">
+				<input id="ipt-pw" type="password" class="validate" ng-model="senha" required>
 				<label for="password">Senha</label>
 			</div>
 		</div>
 		<div class="row" class="area-buttom s6">
-			<a class="waves-effect waves-light btn col s12 red" id="btn-logar" [ng-click="logar();"] [on-hold="onHold()"] [ng-click="auth()]" href="#/app/home">Entrar</a>
+			<button class="waves-effect waves-light btn col s12 red" id="btn-logar" [ng-click="send()"] [href="#/app/home"]>Entrar</button>
 		</div>
 	</form>
 </div>
@@ -46,29 +38,28 @@
 </ion-content>
 </ion-view>
 <script src="lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
-
 <!--<div ng-switch="user">
 <div ng-switch-when="Aluno">
-		<div class="input-field">
-				<input type="text" id="ipt-ra" class="validate" ng-model="login.ra">
-				<label for="ra">RA</label>
-		</div>
-		<div class="input-field">
-				<input id="password" type="password" class="validate" ng-model="login.senha">
-				<label for="password">Senha</label>
-		</div>
+					<div class="input-field">
+										<input type="text" id="ipt-ra" class="validate" ng-model="login.ra">
+										<label for="ra">RA</label>
+					</div>
+					<div class="input-field">
+										<input id="password" type="password" class="validate" ng-model="login.senha">
+										<label for="password">Senha</label>
+					</div>
 </div>
 <div ng-switch-when="Professor">
-		<div class="input-field col s6">
-				<input type="text" id="ipt-ra" class="validate" ng-model="login.nome">
-				<label for="ra">Nome</label>
-		</div>
-		<div class="input-field col s6">
-				<input id="password" type="password" class="validate" ng-model="login.materia">
-				<label for="password">Matéria</label>
-		</div>
-		<div class="input-field col s6">
-				<input id="password" type="password" class="validate" ng-model="login.senha">
-				<label for="password">Senha</label>
-		</div>
+					<div class="input-field col s6">
+										<input type="text" id="ipt-ra" class="validate" ng-model="login.nome">
+										<label for="ra">Nome</label>
+					</div>
+					<div class="input-field col s6">
+										<input id="password" type="password" class="validate" ng-model="login.materia">
+										<label for="password">Matéria</label>
+					</div>
+					<div class="input-field col s6">
+										<input id="password" type="password" class="validate" ng-model="login.senha">
+										<label for="password">Senha</label>
+					</div>
 </div>-->
