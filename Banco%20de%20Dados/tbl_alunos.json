@@ -1,0 +1,10 @@
+/**
+ Export to JSON plugin for PHPMyAdmin
+ @version 0.1
+ */
+
+// Database 'qrschool'
+
+// qrschool.tbl_alunos
+
+[{"Ra":"30000001","Senha":"30000001","Nome":"Donal D. Duck","Sexo":"M","DataNasc":"1978-02-28","Email":"donald@dysney.com","Uuid":null}, {"Ra":"30000003","Senha":"30000003","Nome":"Rolando Lero","Sexo":"M","DataNasc":"1966-04-01","Email":"rolanastrada@escolinha.com.br","Uuid":null}, {"Ra":"30000004","Senha":"30000004","Nome":"Dino Da Silva Sauro","Sexo":"M","DataNasc":"0001-01-30","Email":"dino@saurus.com","Uuid":null}, {"Ra":"30000005","Senha":"30000005","Nome":"Scarlet Johanssen","Sexo":"F","DataNasc":"1980-05-25","Email":"alinda@marvel.com","Uuid":null}, {"Ra":"31611542","Senha":"31611542","Nome":"Bruno Leone A.P. Correa","Sexo":"M","DataNasc":"1997-05-08","Email":"leone.analistadesistemas@outlook.com.br","Uuid":null}, {"Ra":"31627052","Senha":"31627052","Nome":"Izack G.Passos Rodrigues","Sexo":"M","DataNasc":"1908-01-17","Email":"izackbh@gmail.com","Uuid":null}]

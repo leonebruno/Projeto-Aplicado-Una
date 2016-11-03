@@ -1,0 +1,26 @@
+/**
+ Export to JSON plugin for PHPMyAdmin
+ @version 0.1
+ */
+
+// Database 'qrschool'
+
+// qrschool.tbl_alunos
+
+[{"Ra":"30000001","Senha":"30000001","Nome":"Donal D. Duck","Sexo":"M","DataNasc":"1978-02-28","Email":"donald@dysney.com","Uuid":null}, {"Ra":"30000003","Senha":"30000003","Nome":"Rolando Lero","Sexo":"M","DataNasc":"1966-04-01","Email":"rolanastrada@escolinha.com.br","Uuid":null}, {"Ra":"30000004","Senha":"30000004","Nome":"Dino Da Silva Sauro","Sexo":"M","DataNasc":"0001-01-30","Email":"dino@saurus.com","Uuid":null}, {"Ra":"30000005","Senha":"30000005","Nome":"Scarlet Johanssen","Sexo":"F","DataNasc":"1980-05-25","Email":"alinda@marvel.com","Uuid":null}, {"Ra":"31611542","Senha":"31611542","Nome":"Bruno Leone A.P. Correa","Sexo":"M","DataNasc":"1997-05-08","Email":"leone.analistadesistemas@outlook.com.br","Uuid":null}, {"Ra":"31627052","Senha":"31627052","Nome":"Izack G.Passos Rodrigues","Sexo":"M","DataNasc":"1908-01-17","Email":"izackbh@gmail.com","Uuid":null}]
+
+// qrschool.tbl_cursos
+
+[{"Regis_Curso":"1000","Nome":"SISTEMA DE INFORMA\u00c7\u00d5ES","Sigla":"SI"}, {"Regis_Curso":"1001","Nome":"ANALISE E DESENVOLVIMENTO DE SISTEMAS","Sigla":"ADS"}, {"Regis_Curso":"1002","Nome":"CI\u00caNCIAS DA COMPUTA\u00c7\u00c3O","Sigla":"CP"}]
+
+// qrschool.tbl_disciplinas
+
+[{"CodDisc":"1000","NomeDisc":"Banco De Dados I"}, {"CodDisc":"1001","NomeDisc":"Projeto PI"}, {"CodDisc":"1002","NomeDisc":"Praticas Da Programa\u00e7ao"}, {"CodDisc":"1003","NomeDisc":"Fundamentos Da Programa\u00e7ao"}, {"CodDisc":"1004","NomeDisc":"Gerencia De Ti"}, {"CodDisc":"1005","NomeDisc":"Seguran\u00e7a Da Informa\u00e7ao"}, {"CodDisc":"1006","NomeDisc":"Banco De Dados Ii"}, {"CodDisc":"1007","NomeDisc":"Aplica\u00e7\u00f5es Web"}, {"CodDisc":"1008","NomeDisc":"Engenharia De Software"}]
+
+// qrschool.tbl_professores
+
+[{"CodProf":"1","Senha":"1","Nome":"Rodrigo","Email":"rodrigo@una.br","Sexo":"M"}, {"CodProf":"2","Senha":"2","Nome":"Alexandre","Email":"motanha@una.br","Sexo":"M"}, {"CodProf":"3","Senha":"3","Nome":"Flavio","Email":"flavio@una.br","Sexo":"M"}, {"CodProf":"4","Senha":"4","Nome":"Roberto","Email":"roberto@una.br","Sexo":"M"}, {"CodProf":"5","Senha":"5","Nome":"Fabricio","Email":"fabricio@una.br","Sexo":"M"}]
+
+// qrschool.tbl_salas
+
+[{"CodSala":"1000","Num":"255"}, {"CodSala":"1001","Num":"256"}, {"CodSala":"1002","Num":"257"}, {"CodSala":"1003","Num":"258"}, {"CodSala":"1004","Num":"259"}, {"CodSala":"1005","Num":"260"}, {"CodSala":"1006","Num":"261"}]
