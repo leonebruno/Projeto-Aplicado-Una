@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services', 'ngCordova', 'ngMaterial'])//
+var app = angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services', 'ngCordova', 'ngMaterial', ])//
 
 app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
