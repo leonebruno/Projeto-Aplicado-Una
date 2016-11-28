@@ -1,139 +1,180 @@
 var app = angular.module('app.controllers', ['ionic', 'ngCordova', 'ngMaterial', 'ngMessages', ]) //,'ngRoute' 'ja.qr', 'ngMessages', ''material.svgAssetsCache', '$scope', '$stateParams', , 
 
-/*==========================================
-=            Controller for App            =
-==========================================*/
-app.controller('AppCtrl', ['$scope', '$http', function($scope, $timeout, $stateParams, $http) {}])
-
-/*===========================================
-=            Controller for Home            =
-===========================================*/
-app.controller('HomeCtrl', function($scope, $stateParams) {
-    $scope.title = '';
+app.controller('MainCtrl', function($rootScope, $location) {
+    $rootScope.activetab = $location.path();
 })
 
-app.controller('LoadAlunosCtrl', function($scope, $stateParams, $http, $cordovaDialogs) {
+app.controller('AppCtrl', function($scope, $timeout, $stateParams, $http, $cordovaNetwork, $cordovaToast, $rootScope, $location) {
+    //getNetwork();
 
-    $scope.title = "Lista de Alunos";
+    getToast = function(mensagem, tempo) {
+        // Materialize.toast(message, displayLength, className, completeCallback);
+        var $toastContent = $('<span>' + mensagem + '</span>');
+        Materialize.toast($toastContent, tempo);
+    }
+
+    logout = function() {
+        $('button#sair').on('click', function() {
+
+            $('#form-login').show();
+            $('#loading').hide();
+            $('#result').hide();
+
+            window.setTimeout("location.href='#/app/login'", 1000, function() {});
+        });
+    }
 
     $(function() {
-
-        $scope.loadAlunos = function() {
-
-            $('#loading-fr').show();
-
-            $scope.alunos = [];
-
-            var ajaxRequest = $http.get("http://qrschool.hol.es/_includes/alunos/read.php");
-
-            ajaxRequest.success(function(data, status, headers, config) {
-                $scope.alunos = data;
-
-                navigator.notification.alert("Lista atualizada!", // message
-                    $('#loading-fr').hide(), // callback
-                    '', // title
-                    'Entendi' // buttonName
-                );
-            });
-
-            ajaxRequest.error(function(data, status, headers, config) {
-
-                navigator.notification.alert("Erro na atualização!", // message
-                    $('#loading-fr').hide(), // callback
-                    'Erro', // title
-                    'Entendi' //buttonName
-                );
-            });
-        }
-        $scope.loadAlunos();
+        $("#btn-collapse").sideNav();
     });
 
-    /*$(function(){
-
-    loadAlunos(0, 10, 'http://qrschool.hol.es/_includes/aluno.php');
-
-    function loadAlunos(init, max, url){
-        var dados = { init : init, max : max};
-
-        $.post(url, dados, function(data) {
-            console.info(data);
-        }, "json");
+    scanPage = function() {
+        window.setTimeout("location.href='#/app/login'", 1000, function() {});
     }
-});*/
 })
 
-/*============================================
-=            Controller for Login            =
-============================================*/
-app.controller('LoginCtrl', ['$scope', '$http', function($scope, $stateParams, $http, $cordovaDialogs, $urlRouter, $rootScope, $rootScope) {
-    $scope.title = 'Tela de Login';
+app.controller('LoadAlunosCtrl', function($scope, $stateParams, $http, $cordovaDialogs, $rootScope, $location) {
+
+    $scope.pg = {
+        title: 'Lista de Alunos'
+    };
+
+    $scope.loadAlunos = function() {
+
+        $('#loading-fr').show();
+
+        $scope.alunos = [];
+
+        var ajaxRequest = $http.get("http://qrschool.hol.es/_includes/alunos/read.php");
+
+        ajaxRequest.success(function(data, status, headers, config) {
+            $scope.alunos = data;
+
+            if (data.length > 0) {
+
+                navigator.notification.alert("Lista atualizada!", function() {}, '', 'Entendi');
+                $('#loading-fr').hide();
+
+            } else if (data.length == 0) {
+                $('#loading-fr').hide();
+                $('#lista-alunos #lista').hide();
+                $('#lista-alunos').html('<div class="col s12"><span>Lista vazia!</span></div>');
+            }
+        });
+
+        ajaxRequest.error(function(data, status, headers, config) {
+
+            navigator.notification.alert("Erro na atualização!", function() {}, '', 'Entendi');
+            $('#loading-fr').hide()
+        });
+    }
+
+    $(function() {
+        $('#loading-fr').show();
+
+        $scope.alunos = [];
+
+        var ajaxRequest = $http.get("http://qrschool.hol.es/_includes/alunos/read.php");
+
+        ajaxRequest.success(function(data, status, headers, config) {
+            $scope.alunos = data;
+
+            $('#loading-fr').hide();
+        });
+
+        ajaxRequest.error(function(data, status, headers, config) {
+
+            $('#loading-fr').hide();
+        });
+    });
+})
+
+app.controller('LoginCtrl', ['$scope', '$http', function($scope, $stateParams, $http, $cordovaDialogs, $urlRouter, $rootScope, $rootScope, $location) {
+
+    $scope.pg = {
+        title: 'Tela de Login'
+    };
 
     $('#loading').hide();
     $('#result').hide();
 
-    $scope.authUser = function() {
-
-        var ra = $('#ipt-ra').val();
-        var pw = $('#ipt-pw').val();
-
-        $('#loading').show();
-        $('#form-login').hide();
-
-        window.setTimeout("location.href='#/app/home'", 4000, function() {
-            $('#loading').hide();
-            $('#result').hide();
-        });
-    }
-
     $('button#btn-logar').on('click', function() {
 
-        var ra = $('#ipt-ra').val();
+        var cod_account = $('#ipt-cod_account').val();
         var pw = $('#ipt-pw').val();
-        function vazia () {
-            
-        }
+        $scope.ok = false;
 
-        /*var url = 'http://127.0.0.1/qrschool/_includes/alunos/login.php';
-        var type = 'POST';
-        var data = {ra: ra, pw: pw};
-        var success = window.setTimeout("location.href='#/app/home'", 4000, function() {
-            $('#loading').hide();
-            $('#result').hide();
-        });*/
-
-        if ($.trim(ra) != '' && $.trim(pw) != '') {
-            $.post('http://qrschool.hol.es/_includes/alunos/login.php', {
-                ra: ra,
+        if (cod_account !== '' && pw !== '') {
+            $.post('http://qrschool.hol.es/_includes/tbl_accounts/get-account.php', {
+                cod_account: cod_account,
                 pw: pw
             }, function(data) {
                 $('#loading').show();
                 $('#form-login').hide();
-
+                //console.log(data);
                 //$('span#result').show().html(data);
-                if (data == 1) {
-                    $('span#result').show().text('Logado');
-                    //console.log('Logado');
-                    //comeco
-                    window.setTimeout("location.href='#/app/home'", 4000, function() {
-                        $('#form-login').show();
-                        $('#loading').hide();
-                        $('#result').hide();
-                    });
-                    //fim
-                } else if (data == 0) {
+
+                var dados = data;
+
+                if (data == '1550') {
                     $('#loading').hide();
                     $('#form-login').show();
-                    //$('span#result').show().text('Negado');
-                    //console.log('Negado');
-                    navigator.notification.alert('Usuário não cadastrado!', vazia(), '', 'Tente novamente');
+                    navigator.notification.alert('Usuário ou senha incorretos', '', 'Tentar novamente');
+                } else if (data !== '') {
+                    //$('span#result').show().text('Logado');
+                    //console.info(dados[0].nome);
+
+                    if (dados[0].nivel == '1') {
+                        //var acesso = 'dashaluno';
+                        console.log(dados);
+                        window.setTimeout("location.href='#/app/dashaluno'", 4000, function() {
+                            $('#form-login').show();
+                            $('#loading').hide();
+                            //$('#result').hide();
+                        });
+                    } else if (dados[0].nivel == '2') {
+                        //var acesso = 'dashprof';
+                        window.setTimeout("location.href='#/app/dashprof'", 4000, function() {
+                            $('#form-login').show();
+                            $('#loading').hide();
+                            $('#result').hide();
+                        });
+                    }
                 }
             });
-        } else {
-            navigator.notification.alert('Verifique sua conexão com a internet', vazia(), '', '');
+        } else if (cod_account == '' || pw == '') {
+
+            getToast('Preencha os campos corretamente!', 3000);
+
         }
     });
 
-    $scope.send = function() {
+    pegadados = function(dados) {
+        $scope.user = [];
+
+        var ajaxRequest = $http.get("http://qrschool.hol.es/_includes/alunos/gatdados.php");
+
+        ajaxRequest.success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.user = data;
+
+            if (user.nivel == 1) {
+                //Usuarario é Aluno
+                console.log(user.nivel);
+
+            } else if (user.nivel == 2) {
+                //Usuario é Professor
+                console.log(user.nivel);
+
+            }
+        });
+
+        ajaxRequest.error(function(data, status, headers, config) {
+            console.log('Não pegou dados');
+        });
+    }
+
+    /*$scope.send = function() {
 
         pegadados = function() {
 
@@ -146,391 +187,390 @@ app.controller('LoginCtrl', ['$scope', '$http', function($scope, $stateParams, $
         $.post("http://127.0.0.1/qrschool/_includes/alunos/login.php", function(data) {
             $(".result").html(data);
         });
-        /*$.post({
-            type: "POST",
-            url: "http://127.0.0.1/qrschool/_includes/alunos/login.php",
-            data: pegadados(),
-            success: $('#result').html('certo'),
-            dataType: 'json'
-        });*/
-    }
-    //$http.get('http://qrschool.hol.es/_includes/login.php')
-
-    /*$scope.user = [];
-
-    $.ajax({
-        type: "POST",
-        url: "http://qrschool.hol.es/_includes/login.php",
-        data: {
-            acao: 'LoginApp',
-            ra: $('#ipt-ra').val(),
-            senha: $('#password').val()
-        },
-        async: false,
-        dataType: "json",
-        success: function(json) {
-
-            if (json.result == true) {
-                $('#usuario-name').html(json.dados.nome);
-                $('#loading').hide();
-                $('#form-login').show();
-
-                $state.go('app.home');
-            } else {
-                alert(json.msg);
-            }
-        },
-        error: function(xhr, e, t) {
-            console.log(xhr.respondeText);
-        }
-    });*/
-
-    /*$(function() {
-
-        $.ajax({
-                url: 'http://http://qrschool.hol.es/_includes/aluno-login.php',
-                type: 'POST',
-                //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-                data: {
-                    ra: '31611542',
-                    password: '31611542'
-                },
-            })
-            .done(function(data) {
-
-            });
-
-    });*/
-
-    /*$scope.logar = function($scope) {
-        var ra = $('#ipt-ra');
-        var pw = $('#password');
-
-        var done = false;
-        var acesso = 0;
-
-        $(function() {
-            $('#btn-logar').click(function() {
-                if (ra.val() == "" || ra.val() == "RA" || pw.val() == "" || pw.val() == "Senha") {
-                    navigator.notification.alert("Os campos devem ser preenchidos!",
-                        navigator.notificator.alert(),
-                        '',
-                        ''
-                    );
-                } else {
-                    $state.go("/app/cadastro");
-                }
-            });
-        });
-    };*/
-    //$state.go("/app/cadastro");
-    //$scope.window.location.href = 'app/cadastro.html';
-
-
-
-    /**
-        $scope.login = function($scope) {
-
-             $('#form-login').submit(function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    type: "POST",
-                    url: "http://http://qrschool.hol.es/_includes/login.php",
-                    data: {
-                        acao: 'LoginApp',
-                        ra: $('#ipt-ra').val(),
-                        senha: $('#password').val()
-                    },
-                    async: false,
-                    dataType: "json",
-                    success: function(json) {
-
-                        if (json.result == true) {
-                            $('#usuario-name').html(json.dados.nome);
-
-                            $.mobile.changePage('#/app/home', {
-                                transition: "slideFade"
-                            });
-                        } else {
-                            alert(json.msg);
-                        }
-                    },
-                    error: function(xhr, e, t) {
-                        console.log(xhr.respondeText);
-                    }
-                });
-            });
-        }
-             */
-
+    }*/
 }])
 
-/*=============================================================
-=            Controller for Device Especifications            =
-=============================================================*/
-app.controller('deviceCtrl', function($scope, $stateParams, $cordovaDevice) {
+app.controller('DashAlunoCtrl', function($scope, $stateParams, $rootScope, $rootScope, $location, $window) {
 
-        $scope.title = 'Informações do Dispositivo';
-
-        /*$scope.device = $cordovaDevice.getDevice();
-
-        $scope.cordova = $cordovaDevice.getCordova();
-
-        $scope.model = $cordovaDevice.getModel();
-
-        $scope.platform = $cordovaDevice.getPlatform();
-
-        $scope.uuid = $cordovaDevice.getUUID();
-
-        $scope.version = $cordovaDevice.getVersion();
-
-        $scope.fabricante = 'Bruno Leone';*/
-
-        $scope.device = device.cordova;
-        $scope.model = device.model;
-        $scope.platform = device.platform;
-        $scope.uuid = device.uuid;
-        $scope.version = device.version;
-        $scope.manufacturer = device.manufacturer;
-        $scope.isVirtual = device.isVirtual;
-        $scope.serial = device.serial;
-    })
-    /*=============================================
-    =            Controller for signup            =
-    =============================================*/
-app.controller('Signup', function($scope, $stateParams) {})
-
-/*=============================================
-=            Controller for search            =
-=============================================*/
-app.controller('SearchCtrl', function($scope, $stateParams) {})
-    /*====================================================================
-    =            Controller for Scan of the qr code vs alunos            =
-    ====================================================================*/
-app.controller('ScanCtrl', function($scope, $cordovaBarcodeScanner, $cordovaDialogs, $cordovaVibration) {
-    $scope.title = 'Confirmar Presença';
-
-    $scope.scanBarcode = function() {
-
-        $cordovaBarcodeScanner
-            .scan(
-
-                function(result) {
-                    alert("We got a barcode\n" +
-                        "Result: " + result.text + "\n" +
-                        "Format: " + result.format + "\n" +
-                        "Cancelled: " + result.cancelled);
-                },
-                function(error) {
-                    alert("Scanning failed: " + error);
-                }, {
-                    "preferFrontCamera": false, // iOS and Android
-                    "showFlipCameraButton": false, // iOS and Android
-                    "prompt": "Place a barcode inside the scan area", // supported on Android only
-                    "formats": "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-                    "orientation": "landscape" // Android only (portrait|landscape), default unset so it rotates with the device
-                }
-
-            )
-            //.encode(BarcodeScanner.Encode.TEXT_TYPE, "http://")
-            .then(
-
-                function(imageData) {
-                    navigator.notification.alert(imageData.text);
-                    console.log("Barcode Format -> " + imageData.format);
-                    console.log("Cancelled -> " + imageData.cancelled);
-                    $cordovaVibration.vibrate(200);
-                    navigator.notification.alert(console.log("An error happened -> " + imageData.format));
-                },
-                function(error) {
-                    navigator.notification.alert(console.log("An error happened -> " + error));
-                }
-
-            );
-
+    $scope.pag = {
+        title: 'Acesso Aluno',
+        link: ''
+    };
+    $scope.btn = {
+        btn1: 'menu',
+        btn2: 'search',
+        btn3: 'more_vert'
     }
 
-    function startScan() {
+    $scope.scanAula = function() {
 
         cordova.plugins.barcodeScanner.scan(
             function(result) {
-                var s = "Result: " + result.text + "<br/>" +
-                    "Format: " + result.format + "<br/>" +
-                    "Cancelled: " + result.cancelled;
-                $('#resultado').html(s);
+                var s = "result: " + result.text + "<br/>" +
+                    "format: " + result.format + "<br/>" +
+                    "cancelled: " + result.cancelled;
+                $('#conteudo').html(s);
+
+                window.setTimeout("location.href='#/app/loadmaterias'", 2000, function() {
+                    //$('#loading').hide();
+                    //$('#conteudo').show();
+                });
+                //$.post('http://')
             },
             function(error) {
-                alert("Scanning failed: " + error);
+                //navigator.notification.alert("Scanning failed: " + error);
+                if (error) {
+                    navigator.notification.alert(error, 'Erro', function() {}, 'Tente novamente');
+                }
             }
         );
 
     }
 
-    /*$cordovaBarcodeScanner.scan().then(function(imageData) {
-            navigator.notification.alert(imageData.text);
-            console.log("Barcode Format -> " + imageData.format);
-            console.log("Cancelled -> " + imageData.cancelled);
-            $cordovaVibration.vibrate(200);
-            navigator.notification.alert(console.log("An error happened -> " + imageData.format));
-        }, function(error) {
-            navigator.notification.alert(console.log("An error happened -> " + error));
-        });
+    /*$('button#scan-aula').on('click', function() {
 
-        cordova.plugins.barcodeScanner.scan(
-            function(result) {
-                navigator.notification.alert("We got a barcode\n" +
-                    "Result: " + result.text + "\n" +
-                    "Format: " + result.format + "\n" +
-                    "Cancelled: " + result.cancelled, navigator.notificator.alert(), '', 'Ok');
-                $cordovaVibration.vibrate(200);
-            },
-            function(error) {
-                navigator.notification.alert("Scanning failed: " + error, navigator.notificator.alert(), 'Error', 'Ok');
-            }, {
-                "preferFrontCamera": false, // iOS and Android
-                "showFlipCameraButton": true, // iOS and Android
-                "prompt": "Place a barcode inside the scan area", // supported on Android only
-                "formats": "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-                "orientation": "landscape" // Android only (portrait|landscape), default unset so it rotates with the device
-            }
-        );
+        if ($scope.scanAula()) {
+            $scope.scanAula();
+        } else {
+            console.log('Device não informado!');
+
+            $scope.scanAula();
+
+            $('#loading').show();
+            $('#conteudo').hide();
+
+            window.setTimeout("location.href='#/app/loadmaterias'", 2000, function() {
+                //$('#loading').hide();
+                //$('#conteudo').show();
+            });
+        }
+    });*/
+
+    //logout();
+})
+
+app.controller('DashProfCtrl', function($scope, $stateParams, $rootScope, $location, $window) {
+
+    $scope.pag = {
+        title: 'Acesso Professor'
     };
 
-    // NOTE: encoding not functioning yet
-    $cordovaBarcodeScanner
-    .encode(BarcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com")
-    .then(function(success) {
-    // Success!
-    }, function(error) {
-    // An error occurred
-    });
-}, false);*/
+    $scope.btn = {
+        btn1: 'menu',
+        btn2: 'search',
+        btn3: 'more_vert'
+    }
+
+    logout();
 
 })
 
-/*===============================================
-=            Controller for scanning            =
-===============================================*/
-app.controller('dashStudentCtrl', function($scope, $stateParams) {
+app.controller('IniciarChamadaCtrl', function($scope, $stateParams, $rootScope, $location, $window) {
+
+    $scope.pag = {
+        title: 'Iniciar Chamada'
+    };
+
+    $scope.btn = {
+        btn1: 'arrow_back',
+        btn2: 'search',
+        btn3: 'more_vert'
+    }
+
+    //Função que volta a view
+    $scope.$window = $window;
+
+    $scope.goBack = function() {
+        $window.history.back();
+    };
+
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+
+    $('input.autocomplete').autocomplete({
+        data: {
+            "255": null,
+            "256": null,
+            "257": null,
+            "259": null,
+            "267": null,
+            "344": null
+        }
+    });
+
+})
+
+app.controller('profileCtrl', function($scope, $http, $stateParams, $cordovaDevice, $rootScope, $location) {})
+
+app.controller('Signup', function($scope, $stateParams, $rootScope, $location) {})
+
+app.controller('SearchCtrl', function($scope, $stateParams, $rootScope, $location) {})
+
+app.controller('ScanCtrl', function($scope, $cordovaBarcodeScanner, $cordovaDialogs, $cordovaVibration, $rootScope, $location) {
+
+    $scope.pg = {
+        title: 'Confirmar Presença'
+    };
+
+    $scope.btn = {
+        btn1: 'arrow_back',
+        btn2: 'search',
+        btn3: 'more_vert'
+    }
+
+    //Função que volta a view
+    $scope.$window = $window;
+
+    $scope.goBack = function() {
+        $window.history.back();
+    };
+
+})
+
+app.controller('LoadMateriasCtrl', function($scope, $http, $rootScope, $location, $window) {
+
+    $scope.pg = {
+        title: 'Suas Materias'
+    };
+
+    $scope.btn = {
+        btn1: 'arrow_back',
+        btn2: 'search',
+        btn3: 'more_vert'
+    }
+
+    //Função que volta a view
+    $scope.$window = $window;
+
+    $scope.goBack = function() {
+        $window.history.back();
+    };
+
+    loadMateriasRelacionadas = function() {
+
+        $('#loading-fr').show();
+
+        $scope.materias = [];
+
+        var ajaxRequest = $http.get("http://qrschool.hol.es/_includes/materias/lista-materias-relacionadas.php");
+
+        ajaxRequest.success(function(data, status, headers, config) {
+
+            $scope.materias = data;
+
+            navigator.notification.alert("Lista atualizada!", // message
+                $('#loading-fr').hide(), // callback
+                '', // title
+                'Entendi' // buttonName
+            );
+
+            if (data == '') {
+                ("Lista atualizada!");
+            }
+        });
+
+        ajaxRequest.error(function(data, status, headers, config) {
+
+            navigator.notification.alert("Erro na atualização!",
+                $('#loading-fr').hide(), 'Erro', 'Entendi'
+            );
+        });
+
+        $scope.loadMaterias();
+    }
+})
+
+app.controller('OpenAulaCtrl', function($scope, $rootScope, $location) {
+
+    $scope.pag = {
+        title: 'Abrir Aula'
+    };
+
+    $scope.scanBarcode = function() {
+
         cordova.plugins.barcodeScanner.scan(
             function(result) {
-                navigator.notification.alert("We got a barcode\n" +
-                    "Result: " + result.text + "\n" +
-                    "Format: " + result.format + "\n" +
-                    "Cancelled: " + result.cancelled);
+                var s = "result: " + result.text + "<br/>" +
+                    "format: " + result.format + "<br/>" +
+                    "cancelled: " + result.cancelled;
+                //$('#resultado').html(s);
+
+                //$.post('http://')
             },
             function(error) {
-                navigator.notification.alert("Scanning failed: " + error);
-            }, {
-                "preferFrontCamera": true, // iOS and Android
-                "showFlipCameraButton": true, // iOS and Android
-                "prompt": "Place a barcode inside the scan area", // supported on Android only
-                "formats": "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-                "orientation": "landscape" // Android only (portrait|landscape), default unset so it rotates with the device
-            }
-        );
-    })
-    /*=====  End of Controller for scanning  ======*/
-
-/*========================================
-=            DASH FOR STUDENT            =
-========================================*/
-app.controller('dashStudentCtrl', function($scope, $stateParams) {})
-    /*=====  End of DASH FOR STUDENT  ======*/
-
-app.controller('generateQRCtrl', function($scope, $stateParams) {
-        var qr = new QRCode(typeNumber, correction, inputMode);
-        qr.addData(text);
-        qr.make();
-    })
-    /*==========================================
-    =            Controller for map            =
-    ==========================================*/
-app.controller('MapCtrl', function($scope, $ionicLoading, $cordovaGeolocation) {
-        $scope.title = 'Localização';
-
-        $scope.mapCreated = function(map) {
-            $scope.map = map;
-            //$scope.centerOnMe();
-        };
-
-        $scope.centerOnMe = function() {
-            console.log("Centralizando o mapa");
-            if (!$scope.map) {
-                return;
-            }
-
-            navigator.geolocation.getCurrentPosition(function(pos) {
-                console.log('Got pos', pos);
-                $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            }, function(error) {
-                navigator.notificator.alert('Unable to get location: ' + error.message);
-            });
-        };
-    })
-    /*=====  End of Controller for map  ======*/
-
-
-
-/*----------  Controller for connectionCtrl  ----------*/
-app.controller('connectionCtrl', function($scope, $log, $stateParams, $cordovaNetwork, $rootScope) {
-
-        /*var type = $cordovaNetwork.getNetwork()
-
-        var isOnline = $cordovaNetwork.isOnline()
-
-        var isOffline = $cordovaNetwork.isOffline()
-
-
-        // listen for Online event
-        $rootScope.$on('$cordovaNetwork:online', function(event, networkState) {
-            var onlineState = networkState;
-        })
-
-        // listen for Offline event
-        $rootScope.$on('$cordovaNetwork:offline', function(event, networkState) {
-            var offlineState = networkState;
-        })*/
-
-        $scope.checkConnection = function($scope) {
-            var netWorkState = navigator.connection.type;
-
-            var states = {};
-
-            states[Connection.UNKNOWN] = 'Online';
-            states[Connection.ETHERNET] = 'Ethernet';
-            states[Connection.WIFI] = 'WiFi';
-            states[Connection.CELL_2G] = '2G';
-            states[Connection.CELL_3G] = '3G';
-            states[Connection.CELL_4G] = '4G';
-            states[Connection.CELL] = 'Genérica';
-            states[Connection.NONE] = 'Offline';
-
-            navigator.notificator.alert('Conexão: ' + states[netWorkState], onOnline(), '', 'OK');
-        }
-
-        //caso offline
-        document.addEventListener("offline", onOffline, false);
-
-        function onOffline() {
-            // Handle the offline event 
-            console.log("lost connection");
-        }
-
-        //caso online
-        document.addEventListener("online", onOnline, false);
-
-        function onOnline() {
-            // Handle the online event 
-            var networkState = navigator.connection.type;
-
-            if (networkState !== Connection.NONE) {
-                if (dataFileEntry) {
-                    tryToUploadFile();
+                //navigator.notification.alert("Scanning failed: " + error);
+                if (error) {
+                    alert(error, 'Erro', 'Tente novamente');
                 }
             }
-            display('Connection type: ' + networkState);
+        );
+
+    }
+
+})
+
+app.controller('AmigosCtrl', function($scope, $rootScope, $location) {})
+
+app.controller('PresencaManualCtrl', function($scope, $rootScope, $location, $window) {
+
+    $scope.pg = {
+        title: 'Presença Manual'
+    };
+
+    $scope.btn = {
+        btn1: 'arrow_back',
+        btn2: 'search',
+        btn3: 'more_vert'
+    }
+
+    //Função que volta a view
+    $scope.$window = $window;
+
+    $scope.goBack = function() {
+        $window.history.back();
+    };
+
+    $('input.autocomplete').autocomplete({
+        data: {
+            "31611542": null,
+            "31612543": null,
+            "31611414": null,
+            "31611546": null,
+            "31612542": null,
+            "31611415": null
         }
-    })
-    /*---------- End for Controller for  ----------*/
+    });
+
+})
+
+app.controller('TarefasCtrl', function($scope, $ionicListDelegate, $rootScope, $location) {
+
+    $scope.pag = {
+        title: 'Tarefas'
+    };
+
+    $scope.data = {
+        showDelete: false
+    };
+
+    $scope.edit = function(item) {
+        alert('Edit Item: ' + item.id);
+    };
+    $scope.share = function(item) {
+        alert('Share Item: ' + item.id);
+    };
+
+    $scope.moveItem = function(item, fromIndex, toIndex) {
+        $scope.items.splice(fromIndex, 1);
+        $scope.items.splice(toIndex, 0, item);
+    };
+
+    $scope.onItemDelete = function(item) {
+        $scope.items.splice($scope.items.indexOf(item), 1);
+    };
+
+    $scope.items = [{
+        id: 0
+    }, {
+        id: 1
+    }, {
+        id: 2
+    }, {
+        id: 3
+    }, {
+        id: 4
+    }, {
+        id: 5
+    }, {
+        id: 6
+    }, {
+        id: 7
+    }, {
+        id: 8
+    }, {
+        id: 9
+    }, {
+        id: 10
+    }, {
+        id: 11
+    }, {
+        id: 12
+    }, {
+        id: 13
+    }, {
+        id: 14
+    }, {
+        id: 15
+    }, {
+        id: 16
+    }, {
+        id: 17
+    }, {
+        id: 18
+    }, {
+        id: 19
+    }, {
+        id: 20
+    }, {
+        id: 21
+    }, {
+        id: 22
+    }, {
+        id: 23
+    }, {
+        id: 24
+    }, {
+        id: 25
+    }, {
+        id: 26
+    }, {
+        id: 27
+    }, {
+        id: 28
+    }, {
+        id: 29
+    }, {
+        id: 30
+    }, {
+        id: 31
+    }, {
+        id: 32
+    }, {
+        id: 33
+    }, {
+        id: 34
+    }, {
+        id: 35
+    }, {
+        id: 36
+    }, {
+        id: 37
+    }, {
+        id: 38
+    }, {
+        id: 39
+    }, {
+        id: 40
+    }, {
+        id: 41
+    }, {
+        id: 42
+    }, {
+        id: 43
+    }, {
+        id: 44
+    }, {
+        id: 45
+    }, {
+        id: 46
+    }, {
+        id: 47
+    }, {
+        id: 48
+    }, {
+        id: 49
+    }, {
+        id: 50
+    }];
+})

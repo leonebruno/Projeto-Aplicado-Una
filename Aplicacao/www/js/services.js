@@ -1,15 +1,41 @@
 var app = angular.module('app.services', [])
 
-app.service('firebaseIntegracao', function() {
+app.factory('TarefasService', function(){
 
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyBQukA3LrLjU4CR-fgum2fFlC3LBkyL76c",
-        authDomain: "qrschool-55428.firebaseapp.com",
-        databaseURL: "https://qrschool-55428.firebaseio.com",
-        storageBucket: "qrschool-55428.appspot.com",
-        messagingSenderId: "1095308632159"
-    };
-    firebase.initializeApp(config);
+    var chave = 'tarefasIonic';
 
+    function getTarefas(){
+        var tarefas = window.localStorage[chave];
+        if (tarefas) {
+            return angular.fromJson(tarefas);
+        }
+        return [];
+    }
+
+    function salvar(tarefas){
+        window.localStorage[chave] = angular.toJson(tarefas);
+    }
+
+    function obterProxId(){
+        var idTarefa = window.localStorage['idTarefaIonic'];
+        if (idTarefa){
+            idTarefa++;
+        } else {
+            idTarefa = 1;
+        }
+        window.localStorage['idTarefaIonic'] = idTarefa;
+        return idTarefa;
+    }
+
+    return {
+      all: function(){
+        return getTarefas();
+      },
+      salvar: function(tarefas){
+        return salvar(tarefas);
+      },
+      obterProxId: function(){
+        return obterProxId();
+      }
+    }
 });

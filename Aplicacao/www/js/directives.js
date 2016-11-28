@@ -1,50 +1,7 @@
+'use strict';
 var app = angular.module('app.directives', [])
 
 app.directive('map', function() {
-    /*return {
-        restrict: 'E',
-        scope: {
-            onCreate: '&'
-        },
-        link: function($scope, $element, $attr) {
-            function initialize() {
-
-                //estou fazendo depois
-                /*navigator.geolocation.getCurrentPosition(function(pos) {
-                        console.log('Got pos', pos);
-                        $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-                        $scope.loading.hide();
-                    }*/
-
-    /**var mapOptions = {
-                    center: new google.maps.LatLng(43.07493, -89.381388), //google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
-                    zoom: 16,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                var map = new google.maps.Map($element[0], mapOptions);
-
-                $scope.onCreate({
-                    map: map
-                });
-
-                // Stop the side bar from dragging when mousedown/tapdown on the map
-                google.maps.event.addDomListener($element[0], 'mousedown', function(e) {
-                    e.preventDefault();
-                    return false;
-                });
-            }
-
-            if (document.readyState === "complete") {
-                initialize();
-            } else {
-                google.maps.event.addDomListener(window, 'load', initialize);
-            }
-        }
-    }**/
-    // Note: This example requires that you consent to location sharing when
-    // prompted by your browser. If you see the error "The Geolocation service
-    // failed.", it means you probably did not give permission for the browser to
-    // locate you.
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -86,19 +43,26 @@ app.directive('map', function() {
     }
 });
 
-app.directive('auth', function() {
+app.directive('blNavbar', function() {
     return {
-        require: 'ngModel',
-        link: function(scope, element, attr, mCtrl) {
-            function loginValidation(value) {
-                if (value.indexOf("admin") > -1) {
-                    mCtrl.$setValidity('charE', true);
-                } else {
-                    mCtrl.$setValidity('charE', false);
-                }
-                return value;
-            }
-            mCtrl.$parsers.push(loginValidation);
-        }
-    };
+        restrict: 'AE',
+        templateUrl: 'templates/navbar.html',
+        /*scope:{
+            data:'='
+        }*/
+    }
+});
+
+app.directive('qrBotaoRodape', function(){
+    return{
+        restrict: 'AE',
+        templateUrl: 'templates/qrbotaorodape.html'
+    }
+});
+
+app.directive('qrHeader', function(){
+    return{
+        retrict: 'AE',
+        templateUrl: 'templates/qrheader.html'
+    }
 });

@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services', 'ngCordova', 'ngMaterial', ])//
 
-app.run(function($ionicPlatform) {
+app.run(function($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -11,5 +11,9 @@ app.run(function($ionicPlatform) {
         if (window.StatusBar) {
             StatusBar.backgroundColorByHexString('#b71c1c');
         }
+    });
+
+    $rootScope.$on('$viewContentLoaded', function upgradeAllRegistered() {
+        componentHandler.upgradeAllRegistered();
     });
 })
