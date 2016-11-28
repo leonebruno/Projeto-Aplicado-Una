@@ -1,10 +1,10 @@
-<ion-view title="Abrir Aula" scroll="false" ng-init="done=false">
+<ion-view title="Lista de Alunos" scroll="false" ng-init="done=false">
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 	<header class="mdl-layout__header">
 		<div class="mdl-layout__header-row">
 			<!-- Title -->
-			<span class="mdl-layout-title">{{title}}</span>
+			<span class="mdl-layout-title">{{pg.title}}</span>
 			<!-- Add spacer, to align navigation to the right -->
 			<div class="mdl-layout-spacer"></div>
 			<!-- Navigation. We hide it in small screens. -->
@@ -12,7 +12,7 @@
 		</div>
 	</header>
 	<div class="mdl-layout__drawer">
-		<span class="mdl-layout-title">{{title}}</span>
+		<span class="mdl-layout-title">{{pg.title}}</span>
 	</div>
 	<main class="mdl-layout__content">
 	<div class="page-content">
@@ -26,9 +26,9 @@
 			<div class="row" style="margin-top: -40px;">
 				<div class="col s12">
 					<md-group-list>
-					<md-list-item class="md-2-line" ng-repeat="nome in alunos $index">
-					<p>{{nome}}</p>
-					</md-list-item>
+						<md-list-item class="md-2-line" ng-repeat="x in aulas $index">
+							<p>{{nome}}</p>
+						</md-list-item>
 					</md-group-list>
 				</div>
 			</div>

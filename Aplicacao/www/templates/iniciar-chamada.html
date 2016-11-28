@@ -1,0 +1,53 @@
+<ion-view view-title="Dash Professor">
+	<qr-header></qr-header>
+
+	<div class="row">
+		<div class="col s12">
+
+			<div class="row">
+				<div class="col s1">
+					<!-- Switch -->
+					<div class="switch">
+						<label>
+							Fechar
+							<input type="checkbox">
+							<span class="lever"></span>
+							Abrir
+						</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="input-field col s12">
+				<select>
+					<option value="" disabled selected>Turma </option>
+					<option value="1">101 - ADS - Noite</option>
+					<option value="2">102 - ADS - Manhã</option>
+					<option value="3">103 - SI - Noite</option>
+				</select>
+				<!--<label>Turma </label>-->
+			</div>
+
+			<div class="input-field col s12">
+				<select>
+					<option value="" disabled selected>Disciplina </option>
+					<option value="1">Modelagem de Banco de Dados</option>
+					<option value="2">Fundamentos de Programação</option>
+					<option value="3">Projeto Interdisciplinar</option>
+				</select>
+				<!--<label>Turma </label>-->
+			</div>
+
+			<div class="input-field col s12">
+				<input type="text" id="autocomplete-input" class="autocomplete">
+				<label for="autocomplete-input">Sala</label>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="nav tabs" style="position: fixed; display: none;">
+		<button id="scan-aula" class="waves-effect waves-light btn col s12 red tab" id="btn-logar">INICIAR AULA</button>
+	</div>
+
+</ion-view>

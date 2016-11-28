@@ -1,0 +1,21 @@
+<nav>
+	<div class="nav-wrapper red">
+		<a class="flow-text">{{ pag.title }}</a>
+		<a ng-click="" class="flow-text right icon-header"><i class="material-icons">{{ btn.btn3 }}</i></a>
+		<!--<a ng-click="" class="flow-text right icon-header"><i class="material-icons">loop</i></a>-->
+		<a href="#/app/search" class="flow-text right icon-header"><i class="material-icons">{{ btn.btn2 }}</i></a>
+		<a id='btn-goback' data-activates="mobile-demo" [id="btn-collapse"] class="button-collapse"><i ng-click='goBack()' class="material-icons">{{ btn.btn1 }}</i></a>
+		<ul class="right hide-on-med-and-down">
+			<li><a href="sass.html">Sass</a></li>
+			<li><a href="badges.html">Components</a></li>
+			<li><a href="collapsible.html">Javascript</a></li>
+			<li><a href="mobile.html">Mobile</a></li>
+		</ul>
+		<ul class="side-nav" id="mobile-demo">
+			<li><a href="sass.html">Sass</a></li>
+			<li><a href="badges.html">Components</a></li>
+			<li><a href="collapsible.html">Javascript</a></li>
+			<li><a href="mobile.html">Mobile</a></li>
+		</ul>
+	</div>
+</nav>

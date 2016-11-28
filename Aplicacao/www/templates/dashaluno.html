@@ -1,0 +1,34 @@
+<ion-view view-title="Dash Aluno">
+	<qr-header></qr-header>
+	<ion-content padding="true" scroll="false" class="has-header">
+		<div class="row" id="loading" hidden="true">
+			<div class="col s1">
+				<ion-spinner id="ico"></ion-spinner>
+			</div>
+		</div>
+		<div class="spacer" style="height: 18px;"></div>
+		<div class="conteudo">
+
+			<ion-list id="aluno-list21">
+				<ion-item class="item-thumbnail-left item-icon-right" id="aluno-list-item29">
+					<h2>Steve Rogers</h2>
+					<p>Superior em Análise e Desenvolvimento de Sistemas</p>
+					<i class="icon ion-ios-person"></i>
+				</ion-item>
+			</ion-list>
+			<div style="margin-right:-20px;">
+				<button id="aluno-button21" style="left:-10px;" class="button button-assertive button-small button-full">Disciplinas</button>
+			</div>
+			<div id="aluno-button-bar1" class="button-bar"></div>
+			<ion-list id="aluno-list26">
+				<ion-item class="item-divider" id="aluno-list-item-divider12"> Banco de Dados I - Modelagem e Desenvolvimento</ion-item>
+				<ion-item class="item-divider" id="aluno-list-item-divider13"> Programação - Práticas</ion-item>
+				<ion-item class="item-divider" id="aluno-list-item-divider14"> Programação - Fundamentos</ion-item>
+			</ion-list>
+		</div>
+	</ion-content>
+	<div class="nav tabs" style="position: fixed;">
+		<button ng-click="scanAula()" [id="scan-aula"] class="waves-effect waves-light btn col s12 red tab" id="btn-logar">BUSCAR CÓDIGO DE AULA</button>
+	</div>
+	<!--<qr-botao-rodape></qr-botao-rodape>-->
+</ion-view>

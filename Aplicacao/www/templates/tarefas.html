@@ -1,0 +1,70 @@
+<ion-view view-title="Tarefas">
+  <!--<ion-header-bar class="bar-positive">
+      <div class="buttons">
+        <button class="button button-icon icon ion-ios-minus-outline"
+        ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+      </div>
+      <h1 class="title">Ionic Delete/Option Buttons</h1>
+
+      <div class="buttons">
+        <button class="button" ng-click="data.showDelete = false; add()">
+          Add
+        </button>
+
+        <button class="button" ng-click="data.showDelete = false; data.showReorder = !data.showReorder">
+          Reorder
+        </button>
+      </div>
+    </ion-header-bar>-->
+
+    <ion-header-bar>
+      <nav>
+        <div class="nav-wrapper red">
+          <a class="flow-text">{{ pag.title }}</a>
+          <a ng-click="" class="flow-text right icon-header"><i class="material-icons">more_vert</i></a>
+          <a ng-click="" class="flow-text right icon-header"><i class="material-icons">loop</i></a>
+          <a href="#/app/search" class="flow-text right icon-header"><i class="material-icons">search</i></a>
+          <a href="#" data-activates="mobile-demo" id="btn-collapse" class="button-collapse "><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+          </ul>
+        </div>
+      </nav>
+    </ion-header-bar>
+
+    <ion-content>
+
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+      
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <ion-item ng-repeat="item in items" item="item" href="#/item/{{item.id}}" class="item-remove-animate">
+          Item {{ item.id }}
+          <ion-delete-button class="ion-minus-circled" 
+          ng-click="onItemDelete(item)">
+        </ion-delete-button>
+        <ion-option-button class="button-assertive"
+        ng-click="edit(item)">
+        Edit
+      </ion-option-button>
+      <ion-option-button class="button-calm"
+      ng-click="share(item)">
+      Share
+    </ion-option-button>
+    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+  </ion-item>
+
+</ion-list>
+</ion-content>
+</div>
+<qr-botao-rodape></qr-botao-rodape>
+</ion-view>

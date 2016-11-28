@@ -1,4 +1,4 @@
-<ion-view title="Profile" id="page1" style="">
+<!--<ion-view title="Profile" id="page1" style="">
   <ion-content padding="true" class="has-header">
     <form id="profile-form1" class="list">
       <ion-item class="item-avatar" id="profile-list-item20" style="">
@@ -24,4 +24,21 @@
       </ion-item>
     </form>
   </ion-content>
-</ion-view>
+</ion-view>-->
+<!--<table>
+  <tr ng-repeat="x in names">
+    <td>{{ x.cod_account }}</td>
+    <td>{{ x.nome }}</td>
+    <td>{{ x.cpf_cnpj }}</td>
+    <td>{{ x.email }}</td>
+    <td>{{ x.telefone }}</td>
+    <td>{{ x.sexo }}</td>
+    <td>{{ x.uuid }}</td>
+    <td>{{ x.nivel }}</td>
+  </tr>
+</table>-->
+<ion-list>
+  <ion-item class="item list" id="profile-list-item20" ng-repeat="nome in alunos">
+  <h2>{{dados}}</h2>
+  </ion-item>
+</ion-list>

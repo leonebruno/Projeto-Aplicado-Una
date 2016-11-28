@@ -4,7 +4,7 @@
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
-				<span class="mdl-layout-title">{{title}}</span>
+				<span class="mdl-layout-title">{{pg.title}}</span>
 				<!-- Add spacer, to align navigation to the right -->
 				<div class="mdl-layout-spacer"></div>
 				<!-- Navigation. We hide it in small screens. -->
@@ -23,25 +23,39 @@
 					</div>
 				</div>
 				<div>
-					<div class="row" style="margin-top: -40px;">
-						<div class="col s12">
-							<!--<md-list>
-							<md-list-item class="md-2-line" ng-repeat="nome in alunos">-->
-								<ion-list>
-									<ion-item class="item list" id="profile-list-item20" ng-repeat="nome in alunos">
-										<h2>{{nome}}</h2>
-									</ion-item>
-								</ion-list>
-
-								<!--</md-list-item>
-							</md-list>-->
+					<div class="row" id="lista-alunos" style="">
+						<div id="lista" class="col s12">
+							<md-list>
+								<div class="card-panel blue-grey darken-1 col s12 ">
+									<md-list-item class="md-2-line" ng-repeat="nome in alunos track by $index">
+										<h5>{{nome}}</h5>
+									</md-list-item>
+								</div>
+							</md-list>
+							<!--<div class="progress">
+								<div class="indeterminate"></div>
+							</div>
+							<div class="progress">
+								<div class="determinate" style="width: 70%"></div>
+							</div>-->
 						</div>
 					</div>
-					<div layout="row">
+					<!--<div layout="row">
 						<div layout="col s6" id="btn-scan">
 							<button class="waves-effect waves-light btn red md-raised md-cornered" style="width: 100%;">Confirmar Presença</button>
 						</div>
-					</div>
+					</div>-->
+				</div>
+				<div class="fixed-action-btn toolbar">
+					<a class="btn-floating btn-large red">
+						<i class="large material-icons">mode_edit</i>
+					</a>
+					<ul>
+					<li class="waves-effect waves-light"><a href="#/app/dashprof"><i class="material-icons">insert_chart</i></a></li>
+					<li class="waves-effect waves-light"><a href="#/app/dashprof"><i class="material-icons">format_quote</i></a></li>
+					<li class="waves-effect waves-light"><a href="#/app/dashprof"><i class="material-icons">publish</i></a></li>
+					<li class="waves-effect waves-light"><a href="#/app/dashprof"><i class="material-icons">attach_file</i></a></li>
+					</ul>
 				</div>
 			</main>
 		</div>
